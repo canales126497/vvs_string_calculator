@@ -8,6 +8,7 @@ class StringCalculator{
         if(empty($numbers_to_add))
             return 0;
 
+        $numbers_to_add = preg_replace("/\n/", ",", $numbers_to_add);
         $numbers_to_add_array = explode(",", $numbers_to_add);
         $number_of_items_to_add = count($numbers_to_add_array);
 
