@@ -63,5 +63,13 @@ class StringCalculatorTest extends TestCase
         $this->assertEquals(21, $suma_de_numeros);
     }
 
+    /**
+     * @test
+     */
+    function allowsChangingDelimiter()
+    {
+        $suma_de_numeros = $this->calculadora->add("//;\n1\n2;3\n4;5;6");
 
+        $this->assertEquals(21, $suma_de_numeros);
+    }
 }
