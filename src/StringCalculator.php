@@ -16,17 +16,30 @@ class StringCalculator{
         if(preg_match("/\/\//", $numbers_to_add))
         {
             $parts = explode("\n", $numbers_to_add, 2);
-            $delimiter = explode("//", $parts[0])[1];
+            $especified_delimiters = explode("//", $parts[0])[1];
             $start_item = 1;
         }
         else
         {
-            $delimiter = ",";
             $start_item = 0;
         }
 
-        $numbers_to_add = preg_replace("/\n/", $delimiter, $numbers_to_add);
-        $numbers_to_add_array = explode($delimiter, $numbers_to_add);
+        if(isset($especified_delimiters) and preg_match("/[.*]/", $especified_delimiters))
+        {
+            $delimiters = explode("]", $especified_delimiters);
+
+            for($i = 0; $i < count($delimiters); $i++)
+            {
+                $numbers_to_add = str_replace(substr($delimiters[$i], 1), ",", $numbers_to_add);
+            }
+        }
+        elseif(isset($especified_delimiters))
+        {
+            $numbers_to_add = str_replace($especified_delimiters, ",", $numbers_to_add);
+        }
+
+        $numbers_to_add = str_replace("\n", ",", $numbers_to_add);
+        $numbers_to_add_array = explode(",", $numbers_to_add);
         $number_of_items_to_add = count($numbers_to_add_array);
 
         $negatives = array();

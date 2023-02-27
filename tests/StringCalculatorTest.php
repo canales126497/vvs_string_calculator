@@ -92,4 +92,14 @@ class StringCalculatorTest extends TestCase
 
         $this->assertEquals(2, $suma_de_numeros);
     }
+
+    /**
+     * @test
+     */
+    function anyLengthDelimiters()
+    {
+        $suma_de_numeros = $this->calculadora->add("//[]\n1\n2,3");
+
+        $this->assertEquals(6, $suma_de_numeros);
+    }
 }
