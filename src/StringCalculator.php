@@ -2,7 +2,12 @@
 
 namespace Deg540\PHPTestingBoilerplate;
 
+use Exception;
+
 class StringCalculator{
+    /**
+     * @throws Exception
+     */
     function add(string $numbers_to_add):int
     {
         if(empty($numbers_to_add))
@@ -24,10 +29,28 @@ class StringCalculator{
         $numbers_to_add_array = explode($delimiter, $numbers_to_add);
         $number_of_items_to_add = count($numbers_to_add_array);
 
+        $negatives = array();
         $added_number = 0;
         for($i = $start_item; $i < $number_of_items_to_add; $i++)
         {
-            $added_number += intval($numbers_to_add_array[$i]);
+            $number = intval($numbers_to_add_array[$i]);
+            $added_number += $number;
+
+            if($number < 0)
+            {
+                $negatives[] = $number;
+            }
+        }
+
+        if(count($negatives) > 0)
+        {
+            $message = "negativos no soportados: ".$negatives[0];
+
+            for($i = 1; $i < count($negatives); $i++){
+                $message .= ", ".$negatives[$i];
+            }
+
+            throw new Exception($message, 0);
         }
 
         return $added_number;

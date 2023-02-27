@@ -72,4 +72,16 @@ class StringCalculatorTest extends TestCase
 
         $this->assertEquals(21, $suma_de_numeros);
     }
+
+    /**
+     * @test
+     */
+    function negativeNumbersThrowException()
+    {
+        $this->expectExceptionMessage("negativos no soportados: -1, -3, -6");
+
+        $suma_de_numeros = $this->calculadora->add("//;\n-1\n2;-3\n4;5;-6");
+
+
+    }
 }
