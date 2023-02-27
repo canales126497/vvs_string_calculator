@@ -82,4 +82,14 @@ class StringCalculatorTest extends TestCase
 
         $this->calculadora->add("//;\n-1\n2;-3\n4;5;-6");
     }
+
+    /**
+     * @test
+     */
+    function ignoresNumbersAbobe1000()
+    {
+        $suma_de_numeros = $this->calculadora->add("2,1002");
+
+        $this->assertEquals(2, $suma_de_numeros);
+    }
 }

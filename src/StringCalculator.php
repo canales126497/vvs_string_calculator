@@ -34,18 +34,23 @@ class StringCalculator{
         for($i = $start_item; $i < $number_of_items_to_add; $i++)
         {
             $number = intval($numbers_to_add_array[$i]);
-            $added_number += $number;
-
             if($number < 0)
             {
-                $negatives[] = $number;
+                $negatives[] = $number;$added_number += $number;
+            }
+            elseif($number > 1000)
+            {
+                continue;
+            }
+            else
+            {
+                $added_number += $number;
             }
         }
 
         if(count($negatives) > 0)
         {
             $message = "negativos no soportados: ".$negatives[0];
-
             for($i = 1; $i < count($negatives); $i++){
                 $message .= ", ".$negatives[$i];
             }
